@@ -28,49 +28,52 @@ export default () => {
           onChange={onChange}
           value={mode}
           style={{
-            marginBottom: 20,
+            marginBottom: 20, color: '#5b5f75',
             // type= 'dashed'
           }}
         >
         </Radio.Group>
-        <Timeline
-          mode={mode}
-        >
-          <Timeline.Item label={item.timestamp.slice(11, 24)}>
-            {item.eventID}
+        <Timeline mode={mode}
+          onClick={handleClick}
+          style={{
+            color: '#5b5f75',
+            // type= 'dashed'
+          }}>
+
+          {//show date
+            item.dateFlag &&
+            <Timeline.Item
+              label={item.date}
+              style={{
+                fontWeight: 700, padding: 2, justifyContent: 'center', alignItems: 'center',
+                height: 40, width: 120, backgroundColor: '#f1f1f1'
+              }}
+            />
+
+          }
+          
+          <Timeline.Item label={item.timestamp}>
 
             <Anchor
               showInkInFixed={true}
               onClick={handleClick}
-              affix={true}
-              mode={mode}
               id={`#${item.timestamp}`}
             >
+              {/* {item.eventID} */}
               {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
               <Link
                 title={`${item.endpoint_path}`}
                 href={`#${item.timestamp}`}
-                id={`#${item.timestamp}`}
                 style={{ marginRight: 10 }}
               />
 
               <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}
                 {item.method}
               </Button>
+
             </Anchor>
 
           </Timeline.Item>
-          {
-      /*               
-      {
-        showDate(item.timestamp[i], item.timestamp[i - 1]) &&
-        <Timeline.Item
-          label={(item.timestamp[i].slice(0, 11))}>
-          DATE
-        </Timeline.Item>
-      } 
-    */}
-
         </Timeline>
       </>
     );
