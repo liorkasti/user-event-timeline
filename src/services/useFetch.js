@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import * as moment from 'moment';
 
 export default () => {
-    const data = useState([]);
-    const [json, setJson] = useState([]);
+    const [loaded, setLoaded] = useState(false);
     const [events, setEvents] = useState([]);
 
-    async function fetchData() {
+    const getData = () => {
+        const events = [];
 
-        const response = await fetch('data/data-set.json'
+        fetch('../data/data-set.json'
             , {
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,103 +16,31 @@ export default () => {
                 }
             }
         )
-        setJson(response)
-        console.log('json: ' + json)
-
-    }
-
-
-    async function getData() {
-        await fetchData();
-        const data = await json.json();
-        console.log('data: ' + data)
-        const result = [];
-
-        await data.forEach((item, i) => {
-            // for (let i = 0; i < data.length; i++) { 
-            //TODO: sort the data accordingly  
-            result.push({ //TODO: filter date with timestamp hierarchy
-                id: item.id, timestamp: item.timestamp,
-                method: item.method, endpoint_path: item.endpoint_path,
-                user_id: item.user_id, eventID: `event${i}`,
-                date: moment(item.timestamp).format("DD-MM-YYYY"),
-                time: moment(item.timestamp).format("hh:mm:ss:SSS"),
-                dateFlag: false, timeFlag: false
+            .then(function (response) {
+                return response.json();
             })
+            .then(function (data) {
+                data.forEach((event, i) => {
+                    //TODO: sort the data accordingly  
+                    events.push({ //TODO: filter date with timestamp hierarchy
+                        id: event.id, timestamp: event.timestamp,
+                        method: event.method, endpoint_path: event.endpoint_path,
+                        user_id: event.user_id, eventID: `event${i}`,
+                        date: moment(event.timestamp).format("DD-MM-YYYY"),
+                        time: moment(event.timestamp).format("hh:mm:ss:SSS"),
+                        dateFlag: false, timeFlag: false
+                    })
+                    // TODO: to filter moment.date and to moment.time
+                    //if(myJson[i].method)
+                })
 
-            setEvents(dataSet(result));
-            // TODO: to filter moment.date and to moment.time
-            //if(myJson[i].method)
-
-            console.log('events: ' + events)
-            return events;
-        })
-
-        async function dataSet(result) {
-
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    let time = moment(result[0].timestamp).format("hh:mm:ss");
-                    let date = moment(result[0].timestamp).format("DD-MM-YYYY");
-
-                    result.forEach((item, i) => {
-                        // TODO: Set method color
-                        //TODO: second loop that turn on the date and time flag accordingly
-                        if (moment(item.timestamp).format("DD-MM-YYYY") !== date) {
-                            date = moment(item.timestamp).format("DD-MM-YYYY");
-                            result[i].dateFlag = true;
-                            console.log(result[i].dateFlag);
-                            console.log('date: ' + date);
-                        }
-                        if (moment(item.time).format("hh:mm") !== time) {
-                            time = moment(item.time).format("hh:mm");
-                            result[i].timeFlag = true;
-                            console.log(result[i].timeFlag);
-                            console.log('time: ' + time);
-                        }
-                        console.log('event.time: ' + item.time);
-                    });
-
-                    return result;
-
-                }).catch(function () {
-                    console.log("JSON loading attempt has failed!");
-                });
-
-                const error = false;
-
-                if (!error) {
-                    resolve();
-                } else {
-                    reject('JSON loading attempt has failed!');
-                }
-            }, 500);
-        };
-
-        async function init() {
-            await createEvent(event);
-
-            getData();
-        }
-
-        function createEvent(event) {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    data.push(event);
-
-                    const error = false;
-
-                    if (!error) {
-                        resolve();
-                    } else {
-                        reject('JSON loading attempt has failed!');
-                    }
-                }, 500);
+                setLoaded(true)
+                setEvents(events);
+            }).catch(function () {
+                console.log("JSON loading attempt has failed!");
             });
-        }
 
-        // createEvent(event).then(getData).catch(error => console.log(error))
     }
 
-    return [getData];
+    return [loaded, events, getData];
 }
