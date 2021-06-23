@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "antd/dist/antd.css";
+import './Event.css';
+
 import { Anchor, Checkbox, Button, Timeline, Radio } from 'antd';
 
 const { Link } = Anchor;
@@ -27,44 +29,36 @@ export default () => {
         <Radio.Group
           onChange={onChange}
           value={mode}
-          style={{
-            marginBottom: 20, color: '#5b5f75',
-            // type= 'dashed'
-          }}
+          className='Events'
         >
         </Radio.Group>
         <Timeline mode={mode}
           onClick={handleClick}
-          style={{
-            color: '#5b5f75',
-            // type= 'dashed'
-          }}>
+          className='Events'
+        >
 
           {//show date
             item.dateFlag &&
             <Timeline.Item
               label={item.date}
-              style={{
-                fontWeight: 700, padding: 2, justifyContent: 'center', alignItems: 'center',
-                height: 40, width: 120, backgroundColor: '#f1f1f1'
-              }}
+              className='date'
             />
 
           }
           {//show date
-            item.dateFlag ?
-              <Timeline.Item label={item.time}>
+            item.timeFlag ?
+              <Timeline.Item label={item.time} className='timeline-item'>
                 <Anchor
                   showInkInFixed={true}
                   onClick={handleClick}
                   id={`#${item.timestamp}`}
+                  className='anchor'
                 >
                   {/* {item.eventID} */}
                   {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
                   <Link
                     title={`${item.endpoint_path}`}
                     href={`#${item.timestamp}`}
-                    style={{ marginRight: 10 }}
                   />
 
                   <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}

@@ -1,0 +1,104 @@
+.Events {
+  /* display        : relative; */
+  width          : 70%;
+  height         : 70%;
+  justify-content: center;
+  align-items    : center;
+  align-content  : center;
+  text-align     : center;
+  color          : #5b5f75;
+}
+
+.date {
+  background-color: #f1f1f1;
+  font-weight     : 700;
+  justify-content : center;
+  align-items     : center;
+  align-content   : center;
+  height          : 40px;
+  width           : 120px;
+}
+
+.anchor {
+  display        : flex;
+  flex-direction : row;
+  justify-content: space-around;
+  align-items    : center;
+  padding        : 20px 0 20px 0;
+  height         : 20px;
+}
+
+.timeline-item {
+  display        : flex;
+  flex-direction : row;
+  justify-content: space-around;
+  align-items    : center;
+  padding        : 20px 0 20px 0;
+  height         : 20px;
+}
+
+.query-button {
+  color              : white;
+  background-color   : #aab9e3;
+  border             : none;
+  padding            : 5px 20px 5px 20px;
+  font-size          : 20px;
+  font-weight        : 500;
+  border-radius      : 2px;
+  border-bottom-style: none;
+}
+
+.row-alert {
+  display        : flex;
+  flex-direction : row;
+  justify-content: flex-end;
+  align-items    : center;
+  padding        : 20px 0 20px 0;
+  height         : 20px;
+}
+
+.text-alert {
+  padding-left: 20px;
+  padding-top : 12px;
+}
+
+.App-logo {
+  height        : 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height      : 100vh;
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  justify-content : center;
+  font-size       : calc(10px + 2vmin);
+  color           : white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.components-anchor-demo-static {
+  color           : #ff56a8;
+  background-color: #a3a3a3;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
