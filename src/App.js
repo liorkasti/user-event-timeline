@@ -12,42 +12,15 @@ const { Link } = Anchor;
 function App() {
 
   const [loaded, events, getData] = useFetch([]);
-  const [result, setData] = useState([]);
+  const [data, setData] = useState([]);
   const [currentEvent] = Event();
 
-  const dataSet = () => {
-
-    // console.log('events: ', events);
-
-    // let time = moment(events[0].timestamp).format("hh:mm:ss");
-    // let date = moment(events[0].timestamp).format("DD-MM-YYYY");
-    // events.forEach((event, i) => {
-    //   // TODO: Set method color
-    //   //TODO: second loop that turn on the date and time flag accordingly
-    //   if (moment(event.timestamp).format("DD-MM-YYYY") !== date) {
-    //     date = moment(event.timestamp).format("DD-MM-YYYY");
-    //     events[i].dateFlag = true;
-    //     console.log(events[i].dateFlag);
-    //     console.log('date: ' + date);
-    //   }
-    //   if (moment(event.time).format("hh:mm") !== time) {
-    //     time = moment(event.time).format("hh:mm");
-    //     events[i].timeFlag = true;
-    //     console.log(events[i].timeFlag);
-    //     console.log('time: ' + time);
-    //   }
-    //   console.log('event.time: ' + event.time);
-    // });
-
-    setData(events);
-    console.log('database: ', data)
-
-  }
-
   useEffect(() => {
-    dataSet()
-    // setData(getData());
-    // getData()
+    getData();
+    if (loaded) {
+      setData(events)
+      console.log('data: ', data)
+    };
   }, [])
 
   const onChange = link => {
@@ -62,7 +35,6 @@ function App() {
   const getCurrentAnchor = () => '#components-anchor-demo-static'; // TODO: Design row on focus
 
   const showEvent = (event, index) => {
-    // { setDate(timestamp) }
     return (currentEvent(event, index));
   };
 
@@ -92,7 +64,7 @@ function App() {
       </div>
 
       {
-        loaded && result.map((item, i) =>
+        loaded && data && data.map((item, i) =>
           <>
             {showEvent(item, i)}
           </>
