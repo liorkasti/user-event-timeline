@@ -1,28 +1,40 @@
+.timeline {
+  line-break: 'dashed'
+}
+
 .events {
-  display        : flex;
-  flex-direction : column;
-  justify-content: center;
-  width          : 100%;
+  display           : flex;
+  flex-direction    : column;
+  justify-content   : center;
+  /* width          : 100%; */
 }
 
 .method-button {
   background-color   : #f1f1f1;
   color              : #5b5f75;
   border-bottom-style: none;
+  padding            : inherit;
+  margin             : inherit;
   width              : 60px;
   border-radius      : 60px;
   font-weight        : 700;
-  size               : 12px;
 }
 
 .date-button {
   background-color   : #f1f1f1;
   border-bottom-style: none;
+  margin-bottom      : 20px;
+  border-width       : 0.1px;
 }
 
 .anchor-row {
   display       : flex;
   flex-direction: row;
+}
+
+.time-row {
+
+  margin-right        : -40px;
 }
 
 .event {

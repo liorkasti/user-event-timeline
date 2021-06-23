@@ -21,19 +21,17 @@ export default () => {
   const currentEvent = (item, index) => {
     return (
       <>
-        <Timeline mode={mode} onClick={handleClick}        >
+        <Timeline mode={mode} onClick={handleClick} line='dashed' color='#4a6bc7' >
 
           {//show date
             item.dateFlag &&
-            <button
-              className='date'
-              disabled
-              style={{ marginBottom: 16 }}
-            >{item.date}</button>
+            <button className='date-button' disabled>
+              {item.date}
+            </button>
           }
+          
+          <Timeline.Item label={item.time} color='#4a6bc7' /* dot='dashed' */ >
 
-          <Timeline.Item label={item.time}
-          >
             <Anchor
               showInkInFixed={true}
               onClick={handleClick}
@@ -48,7 +46,7 @@ export default () => {
                   className='method-button'
                   onClick={handleClick}
                   style={{
-                    color: item.theme, backgroundColor: 'white', height: 20, 
+                    color: item.theme, backgroundColor: 'white', height: 20,
                     fontWeight: 700, fontSize: 12, borderWidth: 2, borderColor: item.theme
                   }}
                 >
