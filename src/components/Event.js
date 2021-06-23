@@ -25,75 +25,52 @@ export default () => {
 
   const currentEvent = (item, index) => {
     return (
-      <>
+      <div className='Events'>
         <Radio.Group
           onChange={onChange}
           value={mode}
-          className='Events'
         >
         </Radio.Group>
         <Timeline mode={mode}
           onClick={handleClick}
-          className='Events'
         >
 
           {//show date
             item.dateFlag &&
-            <Timeline.Item
+            <button
               label={item.date}
               className='date'
-            />
+            >{item.date}</button>
 
           }
-          {//show date
-            item.timeFlag ?
-              <Timeline.Item label={item.time} className='timeline-item'>
-                <Anchor
-                  showInkInFixed={true}
+
+          <Timeline.Item label={item.time}>
+            <Anchor
+              showInkInFixed={true}
+              onClick={handleClick}
+              id={`#${item.timestamp}`}
+              className='anchor'
+            >
+              {/* {item.eventID} */}
+              {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
+              <div className='event'>
+
+                <Button className='method-button' onClick={handleClick}> {/* TODO: Switch ui button method condition */}
+                  {item.method}
+                </Button>
+
+                <Link
                   onClick={handleClick}
-                  id={`#${item.timestamp}`}
-                  className='anchor'
-                >
-                  {/* {item.eventID} */}
-                  {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
-                  <Link
-                    title={`${item.endpoint_path}`}
-                    href={`#${item.timestamp}`}
-                  />
+                  title={`${item.endpoint_path}`}
+                  href={`#${item.timestamp}`}
+                />
+              </div>
+            </Anchor>
 
-                  <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}
-                    {item.method}
-                  </Button>
+          </Timeline.Item>
 
-                </Anchor>
-
-              </Timeline.Item>
-              :
-              <Timeline.Item label={' '}>
-
-                <Anchor
-                  showInkInFixed={true}
-                  onClick={handleClick}
-                  id={`#${item.timestamp}`}
-                >
-                  {/* {item.eventID} */}
-                  {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
-                  <Link
-                    title={`${item.endpoint_path}`}
-                    href={`#${item.timestamp}`}
-                    style={{ marginRight: 10 }}
-                  />
-
-                  <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}
-                    {item.method}
-                  </Button>
-
-                </Anchor>
-
-              </Timeline.Item>
-          }
         </Timeline>
-      </>
+      </div>
     );
   };
 

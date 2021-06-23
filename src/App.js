@@ -56,18 +56,18 @@ function App() {
       </div>
 
       <hr />
-      <div className='row-alert'>
+      <div className='alert-row'>
         {/* TODO: Missing condition requirement */}
         <Switch size="small" onClick={onClick} />
         {/* TODO: Add a filter function with some logic here */}
-        <p className='text-alert'>Alert only</p>
+        <p className='alert-text'>Alert only</p>
       </div>
 
       {
-        loaded && data && data.map((item, i) =>
-          <>
+        loaded && events.map((item, i) =>
+          <div className="events">
             {showEvent(item, i)}
-          </>
+          </div>
         )
       }
     </div >

@@ -1,8 +1,5 @@
 .App {
-  /* display        : relative; */
-  width          : 70%;
-  height         : 70%;
-  padding        : 30px;
+  padding        : 40px;
   justify-content: center;
   align-items    : center;
   align-content  : center;
@@ -20,7 +17,7 @@
 .row-query {
   display        : flex;
   flex-direction : row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .timeline {
@@ -33,13 +30,12 @@
   background-color   : #aab9e3;
   border             : none;
   padding            : 5px 20px 5px 20px;
-  font-size          : 20px;
   font-weight        : 500;
   border-radius      : 2px;
   border-bottom-style: none;
 }
 
-.row-alert {
+.alert-row {
   display        : flex;
   flex-direction : row;
   justify-content: flex-end;
@@ -48,7 +44,7 @@
   height: 20px;
 }
 
-.text-alert {
+.alert-text {
   padding-left: 20px;
   padding-top: 12px;
 }

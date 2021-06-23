@@ -22,7 +22,7 @@ export default () => {
             .then(function (data) {
                 data.forEach((event, i) => {
                     //TODO: sort the data accordingly  
-                    events.push({ //TODO: filter date with timestamp hierarchy
+                    events.push({
                         id: event.id, timestamp: event.timestamp,
                         method: event.method, endpoint_path: event.endpoint_path,
                         user_id: event.user_id, eventID: `event${i}`,
@@ -30,26 +30,12 @@ export default () => {
                         time: moment(event.timestamp).format("hh:mm:ss:SSS"),
                         dateFlag: false, timeFlag: false
                     })
-                    // TODO: to filter moment.date and to moment.time
-                    //if(myJson[i].method)
-                    let time = moment(events[0].timestamp).format("hh:mm:ss");
-                    let date = moment(events[0].timestamp).format("DD-MM-YYYY");
+                    let date = moment().format("DD-MM-YYYY");
                     events.forEach((event, i) => {
-                        // TODO: Set method color
-                        //TODO: second loop that turn on the date and time flag accordingly
                         if (moment(event.timestamp).format("DD-MM-YYYY") !== date) {
                             date = moment(event.timestamp).format("DD-MM-YYYY");
                             events[i].dateFlag = true;
-                            // console.log(events[i].dateFlag);
-                            // console.log('date: ' + date);
                         }
-                        if (moment(event.time).format("hh:mm") !== time) {
-                            time = moment(event.time).format("hh:mm");
-                            events[i].timeFlag = true;
-                            // console.log(events[i].timeFlag);
-                            // console.log('time: ' + time);
-                        }
-                        // console.log('event.time: ' + event.time);
                     });
                 })
 
