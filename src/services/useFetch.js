@@ -22,13 +22,16 @@ export default () => {
             .then(function (data) {
                 data.forEach((event, i) => {
                     //TODO: sort the data accordingly  
+
+                    const methodTheme = getMethodTheme(event.method);
+
                     events.push({
                         id: event.id, timestamp: event.timestamp,
                         method: event.method, endpoint_path: event.endpoint_path,
                         user_id: event.user_id, eventID: `event${i}`,
                         date: moment(event.timestamp).format("DD-MM-YYYY"),
                         time: moment(event.timestamp).format("hh:mm:ss:SSS"),
-                        dateFlag: false, timeFlag: false
+                        dateFlag: false, theme: methodTheme
                     })
                     let date = moment().format("DD-MM-YYYY");
                     events.forEach((event, i) => {
@@ -45,6 +48,21 @@ export default () => {
                 console.log("JSON loading attempt has failed!");
             });
 
+    }
+
+    function getMethodTheme(method) {
+        switch (method) {
+            case 'GET':
+                return '#50aedb';
+            case 'AUTH':
+                return '#736bc2';
+            case 'POST':
+                return '#70c895';
+            case 'PUT':
+                return '#f4b463';
+            default:
+                return '#50aedb';
+        };
     }
 
     return [loaded, events, getData];

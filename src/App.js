@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Anchor, Switch } from 'antd';
-import * as moment from 'moment';
 
 import './App.css';
 import useFetch from './services/useFetch';
@@ -19,20 +18,8 @@ function App() {
     getData();
     if (loaded) {
       setData(events)
-      console.log('data: ', data)
     };
   }, [])
-
-  const onChange = link => {
-    // console.log('Anchor:OnChange: ', link);
-    // setCurrentAnchor(link)
-  };
-
-  const handleClick = (e, link) => {
-    e.target.scrollIntoView();
-  };
-
-  const getCurrentAnchor = () => '#components-anchor-demo-static'; // TODO: Design row on focus
 
   const showEvent = (event, index) => {
     return (currentEvent(event, index));
@@ -44,7 +31,6 @@ function App() {
   };
 
   return (
-    // TODO: Move out all styles to css file 
     < div className="App">
       <p className='h1' title='User Events Log'>
         {UserID}
@@ -57,17 +43,16 @@ function App() {
 
       <hr />
       <div className='alert-row'>
-        {/* TODO: Missing condition requirement */}
+        {/* TODO: Add a filter function with some logic here (Missing condition requirement) */}
         <Switch size="small" onClick={onClick} />
-        {/* TODO: Add a filter function with some logic here */}
         <p className='alert-text'>Alert only</p>
       </div>
 
       {
         loaded && events.map((item, i) =>
-          <div className="events">
+          <>
             {showEvent(item, i)}
-          </div>
+          </>
         )
       }
     </div >

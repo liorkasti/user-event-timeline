@@ -10,11 +10,6 @@ export default () => {
 
   const [mode, setMode] = useState('left');
 
-  useEffect(() => {
-    // console.log(JSON.stringify(item))
-    // console.log('event: ', item + 'index: ' + index)
-  }, [])
-
   const onChange = e => {
     setMode(e.target.value);
   };
@@ -25,37 +20,38 @@ export default () => {
 
   const currentEvent = (item, index) => {
     return (
-      <div className='Events'>
-        <Radio.Group
-          onChange={onChange}
-          value={mode}
-        >
-        </Radio.Group>
-        <Timeline mode={mode}
-          onClick={handleClick}
-        >
+      <>
+        <Timeline mode={mode} onClick={handleClick}        >
 
           {//show date
             item.dateFlag &&
             <button
-              label={item.date}
               className='date'
+              disabled
+              style={{ marginBottom: 16 }}
             >{item.date}</button>
-
           }
 
-          <Timeline.Item label={item.time}>
+          <Timeline.Item label={item.time}
+          >
             <Anchor
               showInkInFixed={true}
               onClick={handleClick}
               id={`#${item.timestamp}`}
-              className='anchor'
+              className='anchor-row'
             >
-              {/* {item.eventID} */}
-              {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
-              <div className='event'>
+              {/* TODO: Missing condition requirement */}
+              {/* <Checkbox /> */}
 
-                <Button className='method-button' onClick={handleClick}> {/* TODO: Switch ui button method condition */}
+              <div className='event'>
+                <Button
+                  className='method-button'
+                  onClick={handleClick}
+                  style={{
+                    color: item.theme, backgroundColor: 'white', height: 20, 
+                    fontWeight: 700, fontSize: 12, borderWidth: 2, borderColor: item.theme
+                  }}
+                >
                   {item.method}
                 </Button>
 
@@ -70,7 +66,7 @@ export default () => {
           </Timeline.Item>
 
         </Timeline>
-      </div>
+      </>
     );
   };
 
