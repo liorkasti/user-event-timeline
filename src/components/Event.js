@@ -51,29 +51,53 @@ export default () => {
             />
 
           }
-          
-          <Timeline.Item label={item.timestamp}>
+          {//show date
+            item.dateFlag ?
+              <Timeline.Item label={item.time}>
+                <Anchor
+                  showInkInFixed={true}
+                  onClick={handleClick}
+                  id={`#${item.timestamp}`}
+                >
+                  {/* {item.eventID} */}
+                  {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
+                  <Link
+                    title={`${item.endpoint_path}`}
+                    href={`#${item.timestamp}`}
+                    style={{ marginRight: 10 }}
+                  />
 
-            <Anchor
-              showInkInFixed={true}
-              onClick={handleClick}
-              id={`#${item.timestamp}`}
-            >
-              {/* {item.eventID} */}
-              {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
-              <Link
-                title={`${item.endpoint_path}`}
-                href={`#${item.timestamp}`}
-                style={{ marginRight: 10 }}
-              />
+                  <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}
+                    {item.method}
+                  </Button>
 
-              <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}
-                {item.method}
-              </Button>
+                </Anchor>
 
-            </Anchor>
+              </Timeline.Item>
+              :
+              <Timeline.Item label={' '}>
 
-          </Timeline.Item>
+                <Anchor
+                  showInkInFixed={true}
+                  onClick={handleClick}
+                  id={`#${item.timestamp}`}
+                >
+                  {/* {item.eventID} */}
+                  {/* <Checkbox style={{ marginRight: 10 }}></Checkbox> //TODO: Missing condition requirement */}
+                  <Link
+                    title={`${item.endpoint_path}`}
+                    href={`#${item.timestamp}`}
+                    style={{ marginRight: 10 }}
+                  />
+
+                  <Button style={{ marginRight: 10 }}> {/* TODO: Switch ui button method condition */}
+                    {item.method}
+                  </Button>
+
+                </Anchor>
+
+              </Timeline.Item>
+          }
         </Timeline>
       </>
     );

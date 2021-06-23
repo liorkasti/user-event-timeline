@@ -38,7 +38,7 @@ function App() {
             user_id: event.user_id, eventID: `event${i}`,
             date: moment(event.timestamp).format("DD-MM-YYYY"),
             time: moment(event.timestamp).format("hh:mm:ss:SSS"),
-            dateFlag: false, timeFlag: true
+            dateFlag: false, timeFlag: false
           })
           // TODO: to filter moment.date and to moment.time
           //if(myJson[i].method)
@@ -55,12 +55,13 @@ function App() {
             console.log(events[i].dateFlag);
             console.log('date: ' + date);
           }
-          if (moment(event.timestamp).format("hh:mm:ss") === time) {
-            time = moment(event.timestamp).format("hh:mm:ss");
-            events[i].timeFlag = false;
+          if (moment(event.time).format("hh:mm") !== time) {
+            time = moment(event.time).format("hh:mm");
+            events[i].timeFlag = true;
             console.log(events[i].timeFlag);
             console.log('time: ' + time);
           }
+          console.log('event.time: ' + event.time);
         });
 
         setLoaded(true)
@@ -99,31 +100,23 @@ function App() {
 
   return (
     // TODO: Move out all styles to css file 
-    < div className="App" style={{
-      width: window.innerWidth * .7, height: window.innerHeight,
-      padding: 30, justifyContent: 'center', alignItems: 'center'
-    }
-    }>
-      <header className='User Events Log {UserID}' title='User Events Log'>
-        <div style={{ width: window.innerWidth * .8, justifyContent: 'center', alignItems: 'center', fontSize: 22, color: '#4a6bc7', fontWeight: '500', paddingBottom: 30 }}>
-          {UserID}
-        </div>
-      </header>
-      <div style={{
-        fontWeight: 'bold', fontSize: 20, color: '#5b5f75', paddingBottom: 20,
-        marginRight: window.innerWidth * .8 - 100
-      }}>Timeline</div>
-      <hr style={{ width: window.innerWidth * .8, borderWidth: .5, color: '#5b5f75' }} />
-      {/* TODO: Missing condition requirement */}
-      <span style={{ marginLeft: window.innerWidth * .7 - 50, }} >
-        <Switch size="small"
-          onClick={onClick}
-        />
-      </span>
-      {/* TODO: Add a filter function with some logic here */}
-      <p style={{ width: 60, marginLeft: window.innerWidth * .7, marginTop: -20, }}>
-        Alert only
+    < div className="App">
+      <p className='h1' title='User Events Log'>
+        {UserID}
       </p>
+
+      <div className='row-query'>
+        <div className='timeline' title='Timeline'>Timeline</div>
+        <button className='query-button' title='Go to Query'>Go to Query</button>
+      </div>
+
+      <hr />
+      <div className='row-alert'>
+        {/* TODO: Missing condition requirement */}
+        <Switch size="small" onClick={onClick} />
+        {/* TODO: Add a filter function with some logic here */}
+        <p className='text-alert'>Alert only</p>
+      </div>
 
       {
         loaded && data.map((item, i) =>
