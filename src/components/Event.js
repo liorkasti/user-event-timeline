@@ -21,7 +21,7 @@ export default () => {
   const currentEvent = (item, index) => {
     return (
       <>
-        <Timeline mode={mode} onClick={handleClick} line='dashed' color='#4a6bc7' >
+        <Timeline mode={mode} onClick={handleClick} color='#4a6bc7'        >
 
           {//show date
             item.dateFlag &&
@@ -29,9 +29,9 @@ export default () => {
               {item.date}
             </button>
           }
-          
-          <Timeline.Item label={item.time} color='#4a6bc7' /* dot='dashed' */ >
 
+
+          <Timeline.Item label={item.time} color='#4a6bc7'>
             <Anchor
               showInkInFixed={true}
               onClick={handleClick}
@@ -46,8 +46,8 @@ export default () => {
                   className='method-button'
                   onClick={handleClick}
                   style={{
-                    color: item.theme, backgroundColor: 'white', height: 20,
-                    fontWeight: 700, fontSize: 12, borderWidth: 2, borderColor: item.theme
+                    backgroundColor: 'white', color: item.theme, borderColor: item.theme,
+                    height: 20, fontWeight: 700, fontSize: 12, borderWidth: 2
                   }}
                 >
                   {item.method}
@@ -64,6 +64,7 @@ export default () => {
           </Timeline.Item>
 
         </Timeline>
+
       </>
     );
   };

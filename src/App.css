@@ -1,10 +1,10 @@
 .App {
-  padding        : 40px;
   justify-content: center;
   align-items    : center;
   align-content  : center;
   text-align     : center;
   color          : #5b5f75;
+  padding        : 40px;
 }
 
 .h1 {
@@ -41,12 +41,12 @@
   justify-content: flex-end;
   align-items    : center;
   padding        : 20px 0 20px 0;
-  height: 20px;
+  height         : 20px;
 }
 
 .alert-text {
   padding-left: 20px;
-  padding-top: 12px;
+  padding-top : 12px;
 }
 
 .App-logo {

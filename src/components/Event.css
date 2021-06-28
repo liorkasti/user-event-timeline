@@ -1,40 +1,23 @@
-.timeline {
-  line-break: 'dashed'
-}
-
-.events {
-  display           : flex;
-  flex-direction    : column;
-  justify-content   : center;
-  /* width          : 100%; */
-}
-
 .method-button {
-  background-color   : #f1f1f1;
-  color              : #5b5f75;
-  border-bottom-style: none;
-  padding            : inherit;
-  margin             : inherit;
-  width              : 60px;
-  border-radius      : 60px;
-  font-weight        : 700;
+  background-color: #f1f1f1;
+  color           : #5b5f75;
+  padding         : inherit;
+  margin          : inherit;
+  width           : 60px;
+  border-radius   : 60px;
+  font-weight     : 700;
 }
 
 .date-button {
-  background-color   : #f1f1f1;
-  border-bottom-style: none;
-  margin-bottom      : 20px;
-  border-width       : 0.1px;
+  background-color: #f1f1f1;
+  margin-bottom   : 20px;
+  border-width    : .01px;
 }
 
 .anchor-row {
-  display       : flex;
-  flex-direction: row;
-}
-
-.time-row {
-
-  margin-right        : -40px;
+  border-left      : 4px dotted #4a6bc7;
+  margin-left     : -22.5px;
+  z-index          : 0;
 }
 
 .event {
