@@ -48,7 +48,10 @@ function App() {
       {
         loaded && events.map((item) =>
           <>
-            {currentEvent(item)}
+            <div className='vertical-line' />
+            <div className='container'>
+              {currentEvent(item)}
+            </div>
           </>
         )
       }

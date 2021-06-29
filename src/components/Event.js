@@ -24,6 +24,7 @@ export default function Event() {
   const currentEvent = (item) => {
     return (
       <a href={`#${item.eventID}/${item.date}/${item.time}`}>
+
         <Timeline mode={mode} onClick={handleClick} color='#4a6bc7'>
 
           {//show date
@@ -44,14 +45,13 @@ export default function Event() {
                 className='method-button'
                 onClick={handleClick}
                 style={{
-                  backgroundColor: 'white', color: item.theme, borderColor: item.theme,
-                  height: 20, fontWeight: 700, fontSize: 12, borderWidth: 2
+                  color: item.theme, borderColor: item.theme
                 }}
               >
                 {item.method}
               </Button>
 
-              <p id={`#${item.timestamp}`} className='end-point'>{item.timestamp}</p>
+              <p id={`#${item.endpoint_path}`} className='end-point'>{item.endpoint_path}</p>
 
             </div>
 
