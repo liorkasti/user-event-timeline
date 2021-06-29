@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Anchor, Switch } from 'antd';
+import React, { useEffect } from 'react';
+import { Switch } from 'antd';
 
 import './App.css';
 import useFetch from './services/useFetch';
 import Event from './components/Event';
 import { UserID } from './utils/constants';
 
-const { Link } = Anchor;
-
 function App() {
 
-  const [loaded, events, getData] = useFetch([]);
-  const [data, setData] = useState([]);
-  const [currentEvent] = Event();
+  const [loaded, events, getData, /* init */] = useFetch();
+  const [currentEvent, /* target */] = Event();
 
   useEffect(() => {
     getData();
-    if (loaded) {
-      setData(events)
-    };
-  }, [])
+  })
 
-  const showEvent = (event, index) => {
-    return (currentEvent(event, index));
-  };
+
+  /*   useEffect(() => {
+      if (target) {
+        // TODO: set ScroolVeiw when web page is refresh
+        target.target.scrollIntoView();
+      };
+    }, [target]) */
 
   const onClick = () => {
     // Alert / Toggle something    
-    getData();
   };
 
   return (
@@ -49,9 +46,9 @@ function App() {
       </div>
 
       {
-        loaded && events.map((item, i) =>
+        loaded && events.map((item) =>
           <>
-            {showEvent(item, i)}
+            {currentEvent(item)}
           </>
         )
       }

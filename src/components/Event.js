@@ -1,73 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "antd/dist/antd.css";
 import './Event.css';
 
-import { Anchor, Checkbox, Button, Timeline, Radio } from 'antd';
+import { Button, Timeline } from 'antd';
 
-const { Link } = Anchor;
+export default function Event() {
 
-export default () => {
+  const [target, setTarget] = useState();
 
-  const [mode, setMode] = useState('left');
+  const mode = 'left';
 
-  const onChange = e => {
-    setMode(e.target.value);
-  };
+  /*   const onChange = e => {
+      e.target.scrollIntoView();
+    };
+   */
 
   const handleClick = (e, link) => {
+    setTarget(e)
+    // console.log("target: " + e.target)
     e.target.scrollIntoView();
   };
 
-  const currentEvent = (item, index) => {
+  const currentEvent = (item) => {
     return (
-      <>
-        <Timeline mode={mode} onClick={handleClick} color='#4a6bc7'        >
+      <a href={`#${item.eventID}/${item.date}/${item.time}`}>
+        <Timeline mode={mode} onClick={handleClick} color='#4a6bc7'>
 
           {//show date
             item.dateFlag &&
-            <button className='date-button' disabled>
+            <button id={`#${item.date}`} className='date-button' disabled >
               {item.date}
             </button>
           }
 
-
           <Timeline.Item label={item.time} color='#4a6bc7'>
-            <Anchor
-              showInkInFixed={true}
-              onClick={handleClick}
-              id={`#${item.timestamp}`}
-              className='anchor-row'
-            >
-              {/* TODO: Missing condition requirement */}
-              {/* <Checkbox /> */}
 
-              <div className='event'>
-                <Button
-                  className='method-button'
-                  onClick={handleClick}
-                  style={{
-                    backgroundColor: 'white', color: item.theme, borderColor: item.theme,
-                    height: 20, fontWeight: 700, fontSize: 12, borderWidth: 2
-                  }}
-                >
-                  {item.method}
-                </Button>
+            {/* TODO: Missing condition requirement */}
+            {/* <Checkbox /> */}
 
-                <Link
-                  onClick={handleClick}
-                  title={`${item.endpoint_path}`}
-                  href={`#${item.timestamp}`}
-                />
-              </div>
-            </Anchor>
+            <div className='event'>
+              <Button
+                id={`#${item.method}`}
+                className='method-button'
+                onClick={handleClick}
+                style={{
+                  backgroundColor: 'white', color: item.theme, borderColor: item.theme,
+                  height: 20, fontWeight: 700, fontSize: 12, borderWidth: 2
+                }}
+              >
+                {item.method}
+              </Button>
+
+              <p id={`#${item.timestamp}`} className='end-point'>{item.timestamp}</p>
+
+            </div>
 
           </Timeline.Item>
 
         </Timeline>
 
-      </>
+      </a>
     );
   };
 
-  return [currentEvent];
+  return [currentEvent, target];
 }

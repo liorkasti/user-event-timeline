@@ -1,11 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as moment from 'moment';
 
-export default () => {
+export default function Event() {
     const [loaded, setLoaded] = useState(false);
     const [events, setEvents] = useState([]);
 
-    const getData = () => {
+    /*     async function init() {
+            const res = await fetch('../data/data-set.json'
+                , {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }
+                }
+            );
+    
+            const data = await res.json();
+    
+            await data.forEach((event, i) => {
+                //TODO: sort the data accordingly  
+    
+                const methodTheme = getMethodTheme(event.method);
+    
+                events.push({
+                    id: event.id, timestamp: event.timestamp,
+                    method: event.method, endpoint_path: event.endpoint_path,
+                    user_id: event.user_id, eventID: `event${i}`,
+                    date: moment(event.timestamp).format("DD-MM-YYYY"),
+                    time: moment(event.timestamp).format("hh:mm:ss:SSS"),
+                    dateFlag: false, theme: methodTheme, userID: event.user_id
+                })
+                let date = moment().format("DD-MM-YYYY");
+                events.forEach((event, i) => {
+                    if (moment(event.timestamp).format("DD-MM-YYYY") !== date) {
+                        date = moment(event.timestamp).format("DD-MM-YYYY");
+                        events[i].dateFlag = true;
+                    }
+                });
+            })
+    
+            setLoaded(true)
+            setEvents(events);
+            // console.log("init: " + JSON.stringify(events));
+        }
+     */
+
+    function getData() {
         const events = [];
 
         fetch('../data/data-set.json'
@@ -31,7 +71,7 @@ export default () => {
                         user_id: event.user_id, eventID: `event${i}`,
                         date: moment(event.timestamp).format("DD-MM-YYYY"),
                         time: moment(event.timestamp).format("hh:mm:ss:SSS"),
-                        dateFlag: false, theme: methodTheme
+                        dateFlag: false, theme: methodTheme, userID: event.user_id
                     })
                     let date = moment().format("DD-MM-YYYY");
                     events.forEach((event, i) => {
@@ -47,7 +87,6 @@ export default () => {
             }).catch(function () {
                 console.log("JSON loading attempt has failed!");
             });
-
     }
 
     function getMethodTheme(method) {
@@ -64,6 +103,6 @@ export default () => {
                 return '#50aedb';
         };
     }
-
-    return [loaded, events, getData];
+    //TODO: use init function instead of getData and wrap it with Provider
+    return [loaded, events, getData, /* init */];
 }
