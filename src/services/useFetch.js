@@ -99,6 +99,8 @@ export default function Event() {
                 return '#70c895';
             case 'PUT':
                 return '#f4b463';
+            case 'DELETE':
+                return '#c41010';
             default:
                 return '#50aedb';
         };
