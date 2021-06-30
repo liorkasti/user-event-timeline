@@ -9,19 +9,22 @@ import { UserID } from './utils/constants';
 function App() {
 
   const [loaded, events, getData, /* init */] = useFetch();
-  const [currentEvent, /* target */] = Event();
+  const [currentEvent, target] = Event();
 
   useEffect(() => {
     getData();
   })
 
-
-  /*   useEffect(() => {
-      if (target) {
-        // TODO: set ScroolVeiw when web page is refresh
-        target.target.scrollIntoView();
-      };
-    }, [target]) */
+  // TODO: set scrolling position beck to target when re-render
+  useEffect(() => {
+    const hashtag = window.location.hash
+    if (hashtag) {
+      const currentURL = window.location.href
+      const newURL = currentURL.split("#")[0]
+      console.log("currentURL: ", currentURL)
+      window.history.replaceState("", "Lunch", newURL)
+    }
+  }, [target])
 
   const onClick = () => {
     // Alert / Toggle something    

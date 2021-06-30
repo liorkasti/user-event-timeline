@@ -6,26 +6,24 @@ import { Button, Timeline } from 'antd';
 
 export default function Event() {
 
-  const [target, setTarget] = useState();
+  const [target, setTarget] = useState(undefined);
 
   const mode = 'left';
 
-  /*   const onChange = e => {
-      e.target.scrollIntoView();
-    };
-   */
-
   const handleClick = (e, link) => {
-    setTarget(e)
-    // console.log("target: " + e.target)
-    e.target.scrollIntoView();
+    setTarget(e.target);
+    e.target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   };
 
   const currentEvent = (item) => {
     return (
-      <a href={`#${item.eventID}/${item.date}/${item.time}`}>
+      <a id={`#${item.timestamp}`} href={`#${item.eventID}/${item.date}/${item.time}`}>
 
-        <Timeline mode={mode} onClick={handleClick} color='#4a6bc7'>
+        <Timeline
+          mode={mode}
+          onClick={handleClick}
+          color='#4a6bc7'
+        >
 
           {//show date
             item.dateFlag &&
