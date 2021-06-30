@@ -13,9 +13,8 @@
   background-color: #f1f1f1;
   margin-bottom   : 20px;
   border-width    : .01px;
-  border-width    : 2px;
   z-index         : 999;
-  margin-right    : 100px;
+  margin-right    : 150px;
 }
 
 .event {

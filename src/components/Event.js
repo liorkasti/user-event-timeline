@@ -44,9 +44,7 @@ export default function Event() {
                 id={`#${item.method}`}
                 className='method-button'
                 onClick={handleClick}
-                style={{
-                  color: item.theme, borderColor: item.theme
-                }}
+                style={{ color: item.theme, borderColor: item.theme }}
               >
                 {item.method}
               </Button>
