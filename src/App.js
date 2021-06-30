@@ -8,12 +8,13 @@ import { UserID } from './utils/constants';
 
 function App() {
 
-  const [loaded, events, getData, /* init */] = useFetch();
+  const [loaded, events, getData, getEvents, /* init */] = useFetch();
   const [currentEvent, /* target */] = Event();
 
   useEffect(() => {
     getData();
-  })
+    // getEvents();
+  }, [])
 
 
   /*   useEffect(() => {

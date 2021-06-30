@@ -1,9 +1,42 @@
 import { useState } from 'react';
 import * as moment from 'moment';
 
-export default function Event() {
+import jsonServer from './api/jsonServer';
+
+export default function useReducer(state, action) {
     const [loaded, setLoaded] = useState(false);
     const [events, setEvents] = useState([]);
+
+    function getEvents() {
+        return async () => {
+            const response = await jsonServer.get('data-set');
+            console.log("response: " + response)
+            response.data.forEach((event, i) => {
+                //TODO: sort the data accordingly  
+
+                const methodTheme = getMethodTheme(event.method);
+
+                events.push({
+                    id: event.id, timestamp: event.timestamp,
+                    method: event.method, endpoint_path: event.endpoint_path,
+                    user_id: event.user_id, eventID: `event${i}`,
+                    date: moment(event.timestamp).format("DD-MM-YYYY"),
+                    time: moment(event.timestamp).format("hh:mm:ss:SSS"),
+                    dateFlag: false, theme: methodTheme, userID: event.user_id
+                })
+                let date = moment().format("DD-MM-YYYY");
+                events.forEach((event, i) => {
+                    if (moment(event.timestamp).format("DD-MM-YYYY") !== date) {
+                        date = moment(event.timestamp).format("DD-MM-YYYY");
+                        events[i].dateFlag = true;
+                    }
+                });
+            })
+
+            setLoaded(true)
+            setEvents(events);
+        };
+    }
 
     /*     async function init() {
             const res = await fetch('../data/data-set.json'
@@ -104,5 +137,5 @@ export default function Event() {
         };
     }
     //TODO: use init function instead of getData and wrap it with Provider
-    return [loaded, events, getData, /* init */];
+    return [loaded, events, getData, getEvents, /* init */];
 }
