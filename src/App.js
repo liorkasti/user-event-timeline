@@ -12,8 +12,8 @@ function App() {
   const [currentEvent, /* target */] = Event();
 
   useEffect(() => {
-    getData();
-    // getEvents();
+    // getData();
+    getEvents();
   }, [])
 
 

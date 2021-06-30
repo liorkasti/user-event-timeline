@@ -10,8 +10,8 @@ export default function useReducer(state, action) {
     function getEvents() {
         return async () => {
             const response = await jsonServer.get('data-set');
-            console.log("response: " + response)
-            response.data.forEach((event, i) => {
+
+            await response.data.forEach((event, i) => {
                 //TODO: sort the data accordingly  
 
                 const methodTheme = getMethodTheme(event.method);
@@ -32,7 +32,7 @@ export default function useReducer(state, action) {
                     }
                 });
             })
-
+            console.log("response: " + response);
             setLoaded(true)
             setEvents(events);
         };
